@@ -34,7 +34,7 @@ export function MapView({
   const wrapperRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<import("leaflet").Map | null>(null);
   const markersRef = useRef<import("leaflet").Marker[]>([]);
-  const leafletRef = useRef<typeof import("leaflet") | null>(null);
+  const leafletRef = useRef<typeof import("leaflet").default | null>(null);
 
   const fallbackCenter: [number, number] =
     center ||
@@ -53,7 +53,7 @@ export function MapView({
       if (cancelled || !wrapperRef.current) return;
 
       const L = leaflet.default;
-      leafletRef.current = leaflet;
+      leafletRef.current = L;
 
       wrapper.replaceChildren();
       const mapEl = document.createElement("div");
@@ -88,7 +88,7 @@ export function MapView({
 
   useEffect(() => {
     const map = mapRef.current;
-    const L = leafletRef.current?.default;
+    const L = leafletRef.current;
     if (!map || !L) return;
     syncMarkers(L, map, markersRef.current, pins);
     syncView(L, map, pins, center, zoom);
