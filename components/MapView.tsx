@@ -34,7 +34,7 @@ export function MapView({
   const wrapperRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<import("leaflet").Map | null>(null);
   const markersRef = useRef<import("leaflet").Marker[]>([]);
-  const leafletRef = useRef<typeof import("leaflet").default | null>(null);
+  const leafletRef = useRef<any>(null);
 
   const fallbackCenter: [number, number] =
     center ||
