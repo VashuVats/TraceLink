@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import "leaflet/dist/leaflet.css";
 import type { MapPin } from "./map-types";
 
 export type { MapPin };
@@ -49,7 +50,6 @@ export function MapView({
 
     void (async () => {
       const leaflet = await import("leaflet");
-      await import("leaflet/dist/leaflet.css");
       if (cancelled || !wrapperRef.current) return;
 
       const L = leaflet.default;
@@ -128,10 +128,9 @@ function syncMarkers(
     }).addTo(map);
 
     marker.bindPopup(
-      `<div style="font-size:12px"><p style="font-weight:600;margin:0 0 2px">${escapeHtml(pin.label)}</p>${
-        pin.detail
-          ? `<p style="margin:0;color:#666">${escapeHtml(pin.detail)}</p>`
-          : ""
+      `<div style="font-size:12px"><p style="font-weight:600;margin:0 0 2px">${escapeHtml(pin.label)}</p>${pin.detail
+        ? `<p style="margin:0;color:#666">${escapeHtml(pin.detail)}</p>`
+        : ""
       }</div>`
     );
 
